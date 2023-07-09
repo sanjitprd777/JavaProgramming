@@ -1,0 +1,4 @@
+Predicate functional interface is used for conditional check.
+Where you think, we can use these true/false returning functions in day-to-day programming we should choose Predicate.
+
+boolean test(T t);

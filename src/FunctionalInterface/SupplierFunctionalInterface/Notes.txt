@@ -1,0 +1,5 @@
+Supplier can be used in all contexts where there is not input but an output is expected
+
+Suppose you want to return a test double result.
+
+T get();

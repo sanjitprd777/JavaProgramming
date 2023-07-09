@@ -1,0 +1,5 @@
+Cunsumer<T> is an in-built functional interface introduced in Java 8.
+Used in all context where object needs to be consumed i:e taken as input, and some operation is to be performed on the
+object without returning any result.
+Operation such as manipulation of object or print something.
+void accept(T t); // Does not return anything
