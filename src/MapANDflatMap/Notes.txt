@@ -1,0 +1,29 @@
+Map & flatMap
+Java 8, stream API provides map() and flatMap() method. Both these methods are intermediate methods and return another stream as part of the output.
+
+map() method used for transformation
+flatMap() used for transformation & flattering
+
+flatMap() -> map() + flattering
+
+MAP
+map() method -> Data Transformation. Suppose you've a complex object, and you want to fetch a particular value then a map is helpful.
+map() takes Stream<T> as input and return Stream<R> -> Stream<R> map(Stream<T> input){}
+<R> Stream<R> map(Function<? super T, ? extends R> mapper);
+
+Its mapper function produces a single value for each input value. Hence, it is also called One-To-One mapping.
+
+
+Flat MAP
+flatMap() method -> Data Transformation + Flattering
+flatMap() takes Stream<Stream<T>> as input and return Stream<R> -> Stream<R> map(Stream<Stream<T>> input){}
+<R> Stream<R> map(Function<? super T, ? extends Stream<? extends R>> mapper);
+
+Its mapper function produces a multiple value for each input value. Hence, it is also called One-To-Many mapping.
+
+
+Data Transformation and Flattering
+Stream.of("a", "b", "c") -> [A, B, C, D] (Transformation data from lowercase to uppercase)
+[[1, 2], [3, 4], [5, 6]] -> [1, 2, 3, 4, 5, 6] (Convert stream of stream into single stream)
+
+

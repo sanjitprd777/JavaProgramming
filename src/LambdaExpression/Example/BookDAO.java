@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BookDAO {
 
-    List<Book> books;
+    public List<Book> books;
 
     public BookDAO() {
         books = new ArrayList<>();

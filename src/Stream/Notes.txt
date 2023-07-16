@@ -1,0 +1,17 @@
+Stream in Java.
+Stream API is used to process a collection of objects.
+
+A stream is a sequence of objects that supports various methods which can be pipelined to produce a desire result.
+
+Stream is not data structures; it takes input from collection, array or I/O channel.
+
+It does not change the original data, it provides the result as per pilelined methods.
+
+Why we need it?
+- Achieve functional programming
+- Code reduce
+- Bulk operations
+
+Methods:
+Filter - for conditional check (Supports consumer functional interface)
+forEach - For iteration (Supports predicate functional interface)

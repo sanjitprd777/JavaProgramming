@@ -1,5 +1,5 @@
-Supplier can be used in all contexts where there is not input but an output is expected
+Supplier can be used in all contexts where there is no input but an output is expected
 
-Suppose you want to return a test double result.
+Suppose you want to return a test result.
 
 T get();
