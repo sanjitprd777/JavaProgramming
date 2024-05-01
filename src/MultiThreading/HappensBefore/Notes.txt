@@ -1,0 +1,34 @@
+The Java Happens before provides a guarantee to multiple threads running on same Main memory Frames.
+
+For,
+1. ThreadWrite: When we're writing a volatile variable, then all visible variables in the same code block declared before
+   will also be written back to the Main memory.
+2. ThreadRead: When we're reading a volatile variable, then all visible variables in the same block declared after
+   will also be read from the main memory.
+
+The CPU does reordering of instructions (looking at future instructions) for faster execution.
+It if does the reordering of instructions then it might put the volatile variable at some other place from where
+user has written it during code execution.
+This will break the core logic and something unexpected will happen.
+For Ex: Variables defined after volatile variable write operation will not guarantee to be written immediately.
+
+To mitigate this problem, java provides happens before guarantee.
+1. Any write to volatile variable will remains before write to volatile variable. Those instruction declated before varialbe
+can reorder them selves.
+2. Similarly, an read to a volatile variable will happen before read of other variable. Other read variable can reorder.
+
+
+
+// Happens before guarantees for synchronized block code
+synchronized(this) {
+    this.valA = v.valA;
+    this.valB = v.valC;
+    this.valC = v.valC;
+}
+
+When a thread enters the sync block, the thread will refresh all variables from the main memory.
+When thread exits the sync block, all visible variables will be flushed to the main memory.
+
+Any writing to a sync variable before thread exits sync block will remain to happen before threads exits sync block. It can not be moved after the thread exits the sync block.
+Any read to a sync variable before thread enter sync block will remain to happen after threads enter sync block. It can not be moved before the thread enters the sync block.
+
