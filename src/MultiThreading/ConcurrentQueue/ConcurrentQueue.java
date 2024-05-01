@@ -7,13 +7,14 @@ import java.util.concurrent.Executors;
 
 public class ConcurrentQueue {
 
+    Object obj = new Object();
     final List<Integer> queue = new ArrayList<>();
     Integer countAdd = 0;
     final int N = 1000000;
     int value = 0;
 
     void enqueue(Integer val) {
-        synchronized (queue) {
+        synchronized (obj) {
             countAdd++;
             queue.add(val);
         }
@@ -26,7 +27,7 @@ public class ConcurrentQueue {
     }
 
     Integer getSize() {
-        synchronized (queue) {
+        synchronized (obj) {
             return queue.size();
         }
     }
