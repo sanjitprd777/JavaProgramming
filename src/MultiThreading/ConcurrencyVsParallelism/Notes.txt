@@ -1,0 +1,21 @@
+1. Concurrency: It means making progress on more than one task - seemingly at a time.
+Since CPU can only execute one program at a time, CPU executes one task for a little bit then switches
+to another task then back to another task. The tasks are called threads.
+Thus, it looks like a computer is working on more than one task at a time, but internally it is doing context switch.
+
+2. Parallel Exec: Making progress on more than one task exactly at the same time.
+Need more than one CPU, so individual threads can run on individual CPU and no context switching happening.
+
+3. Parallel Concurrent exec: Making progress on more than one task - seemingly at the same time on more than one cpu.
+Need multiple CPUs.
+CPU1: Two threads running, CPU2: Two more threads running.
+A thread on a CPU can run exactly at the same time with another thread running on different CPU.
+
+4. Parallelism: Split a single task into subtasks which can be executed parallel.
+A task is divided into four threads, then two threads running on CPU1 other, two threads running on CPU2.
+
+Combination:
+Concurrent but not parallel.
+Parallel but not concurrent.
+Both concurrent and parallel.
+Neither concurrent nor parallel.
