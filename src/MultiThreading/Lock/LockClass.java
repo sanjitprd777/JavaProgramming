@@ -7,7 +7,6 @@ import java.util.concurrent.locks.ReentrantLock;
 public class LockClass {
     /*
     Lock interface represents a lock which can guard a critical section from entering more than one thread at a time.
-
      */
 
     public static void main(String[] args) {
@@ -65,7 +64,7 @@ public class LockClass {
     }
 
     private static void lockInterruptibliy() {
-        // The lock interruptibly will only lock the lock if thread is not interrupted
+        // The lock interruptible will only lock the lock if thread is not interrupted.
         Lock lock = new ReentrantLock();
         Thread.currentThread().interrupt();
         // If we do lock.lock() it will not work properly and wouldn't throw an exception.
@@ -85,7 +84,7 @@ public class LockClass {
             // Useful in a situation where a thread has other work to do, and wants to get lock as well.
             // Try lock will not respect any fairness guarantees.
 
-            // To do so we've to provide timeout for lock.
+            // To do so, we've to provide timeout for lock.
             boolean lockSuc = lock.tryLock(1000, TimeUnit.MILLISECONDS);
             System.out.println("Lock success: " + lockSuccess);
         } catch (InterruptedException e) {

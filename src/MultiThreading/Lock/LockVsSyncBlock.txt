@@ -1,0 +1,9 @@
+1. Synchronized block must be contained within a single method.
+lock.lock() and lock.unlock() can be called from different methods
+
+2. lock.lock() and lock.unlock() provides the same visibility and happens before guarantees as
+entering and exiting a sync block.
+
+3. Synchronized blocks are always reentrant. Lock could decide not to be.
+
+4. Synchronized blocks do not guarantee fairness. Lock can.
