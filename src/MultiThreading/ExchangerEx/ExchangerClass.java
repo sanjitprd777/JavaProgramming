@@ -2,7 +2,7 @@ package MultiThreading.ExchangerEx;
 
 import java.util.concurrent.Exchanger;
 
-public class FutureTaskEx1 {
+public class ExchangerClass {
 
     /*
     To exchange data between threads, we can use Exchanger service.
