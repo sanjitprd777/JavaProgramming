@@ -16,6 +16,7 @@ public class Runnable2 implements Runnable {
     public void run() {
         String threadName = Thread.currentThread().getName();
 
+        // Inorder to prevent deadlock, switch lock1 and lock2 position.
         System.out.println(threadName + " attempting to lock Lock 2");
         lock2.lock();
         System.out.println(threadName + " locked Lock 2");
