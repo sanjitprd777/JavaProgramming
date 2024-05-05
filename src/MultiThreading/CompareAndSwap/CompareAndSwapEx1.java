@@ -2,7 +2,7 @@ package MultiThreading.CompareAndSwap;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CompareAndSwap {
+public class CompareAndSwapEx1 {
 
     AtomicInteger integer = new AtomicInteger(0);
 
@@ -30,7 +30,7 @@ public class CompareAndSwap {
     }
 
     public static void main(String[] args) {
-        CompareAndSwap compareAndSwap = new CompareAndSwap();
-        compareAndSwap.execute();
+        CompareAndSwapEx1 compareAndSwapEx1 = new CompareAndSwapEx1();
+        compareAndSwapEx1.execute();
     }
 }
