@@ -1,48 +1,32 @@
 package MultiThreading;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Arrays;
 
 public class ThreadDemo {
 
-    public static Future<Long> solve(int n) {
+    public static class SortTask implements Runnable {
 
-        CompletableFuture<Long> future = new CompletableFuture<>();
-        long square = (long) n * (long) n;
-        if (square > Integer.MAX_VALUE) {
-            future.completeExceptionally(new ArithmeticException("The square of the val exceeds the limit of the integer"));
-        } else {
-            future.complete(square);
+        // You can add any attribute needed here.
+        int[] arr;
+
+        // You can add params required to the constructor.
+        public SortTask(int[] a) {
+            // Init here.
+            arr = a;
         }
-        return future;
+
+        @Override
+        public void run() {
+            // --- write your code here ---
+            Arrays.sort(arr);
+        }
     }
 
-    public static void main(String[] args) {
-        Future<Long> f = solve(100);
-        try {
-            System.out.println(f.get());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        List<String> strL = List.of("abc", "def");
-        Thread th = new Thread(() -> {
-            StringBuilder sb = new StringBuilder();
-            for (String str : strL)
-                sb.append(str);
-            System.out.println(sb.toString());
-        });
+    public static void main(String[] args) throws InterruptedException {
+        int[] a = new int[]{6,3,1,9};
+        Thread th = new Thread(new SortTask(a));
         th.start();
-        CompletableFuture.supplyAsync(() -> {
-            return "Hi";
-        });
-//        th.setDaemon(true);
-        AtomicBoolean flag = new AtomicBoolean();
-        flag.set(false);
-//        th.setPriority(33);
-        int x = Thread.MIN_PRIORITY;
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
+        th.join();
+        System.out.println(Arrays.toString(a));
     }
 }

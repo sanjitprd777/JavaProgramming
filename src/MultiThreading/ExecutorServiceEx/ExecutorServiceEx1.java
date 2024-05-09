@@ -26,12 +26,20 @@ public class ExecutorServiceEx1 {
                 TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<>(128) // tasks submitted will be stored in queue.
         );
-
+        threadPoolExecutor.submit(() -> System.out.printf("Hiii"));
+        threadPoolExecutor.shutdown();
         // Both corePoolSize and maxPoolSize will be 3.
         ExecutorService threadPoolExecutor1 = Executors.newFixedThreadPool(3);
 
         // The shutdown method waits until all threads submitted to executor service finish execution.
         threadPoolExecutor1.shutdown();
+        Executors.newSingleThreadExecutor();
+        ThreadPoolExecutor threadPoolExecutor2 = new ThreadPoolExecutor(
+                3,
+                3,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
 
         // It attempts to stop all tasks that are currently in execution. Not guarantee to stop always.
         // It immediately exits, hence all queue tasks will get canceled. All non-executed tasks will be
