@@ -1,6 +1,9 @@
 package MultiThreading.ExecutorServiceEx;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
+import java.util.function.Consumer;
 
 public class ExecutorServiceClass {
 
@@ -9,7 +12,7 @@ public class ExecutorServiceClass {
     It has two implementations classes: ThreadPoolExecutor and ScheduledThreadPoolExecutor.
     It has two methods to run tasks: execute & submit.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
         // execute method takes runnable interface and executes the task.
@@ -48,6 +51,42 @@ public class ExecutorServiceClass {
             e.printStackTrace();
         }
         executorService.shutdown();
+
+        Callable<int[]> cc = new Callable<int[]>() {
+            @Override
+            public int[] call() throws Exception {
+                return new int[0];
+            }
+        };
+        List<Callable<int[]>> cl = new ArrayList<>();
+        cl.add(cc);
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(33);
+            }
+        };
+        Thread thh = new Thread(r);
+        ExecutorService ess = Executors.newFixedThreadPool(3);
+        ess.submit(cc);
+        List<Future<int[]>> futures = ess.invokeAll(cl);
+        for (Future<int[]> f : futures) {
+            int[] ints = f.get();
+        }
+        Consumer<String> con = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println("I'm consumer " + s);
+            }
+        };
+        Runnable rr = new Runnable() {
+            @Override
+            public void run() {
+                con.accept("hi");
+            }
+        };
+        Thread thhfh = new Thread(rr);
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
     }
 
     private static Runnable getRunnable(String msg) {
@@ -69,7 +108,7 @@ public class ExecutorServiceClass {
         };
     }
 
-    private static Callable getCallable(String msg) {
+    private static Callable<String> getCallable(String msg) {
         return new Callable() {
           @Override
           public Object call() {
