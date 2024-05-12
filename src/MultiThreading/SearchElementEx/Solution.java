@@ -1,4 +1,4 @@
-package MultiThreading.Demo;
+package MultiThreading.SearchElementEx;
 
 // You can import any package needed here
 
@@ -54,13 +54,11 @@ public class Solution {
         ExecutorService es = Executors.newFixedThreadPool(threadNum);
         int n = array.length;
         int step = n/threadNum;
-        System.out.println("Step" + step);
         List<SearchTask> l = new ArrayList<>();
         for (int i=0;i<threadNum-1;++i) {
-            l.add(new SearchTask(this, array, i*step, (i+1)*step-1, target));
+            l.add(new SearchTask(this, array, target, i*step, (i+1)*step-1));
         }
-        System.out.println((threadNum-1)*step + " : " + (n-1));
-        l.add(new SearchTask(this, array, (threadNum-1)*step, n-1, target));
+        l.add(new SearchTask(this, array, target, (threadNum-1)*step, n-1));
         List<Future<Integer>> ll = es.invokeAll(l);
         es.shutdown();
         for (int i=0;i<ll.size();++i) {
