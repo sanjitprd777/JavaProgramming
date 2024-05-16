@@ -27,6 +27,7 @@ public class ExecutorServiceEx1 {
                 new ArrayBlockingQueue<>(128) // tasks submitted will be stored in queue.
         );
         threadPoolExecutor.submit(() -> System.out.printf("Hiii"));
+        threadPoolExecutor.execute(() -> System.out.printf("Hiii"));
         threadPoolExecutor.shutdown();
         // Both corePoolSize and maxPoolSize will be 3.
         ExecutorService threadPoolExecutor1 = Executors.newFixedThreadPool(3);
