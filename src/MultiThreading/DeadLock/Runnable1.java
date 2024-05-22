@@ -1,4 +1,4 @@
-package MultiThreading.DeadLock.DeadLockEx1;
+package MultiThreading.DeadLock;
 
 import java.util.concurrent.locks.Lock;
 

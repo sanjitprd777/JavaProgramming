@@ -1,31 +1,22 @@
 package MultiThreading.Synchronizers.BoundedSemaphore;
 
 public class BoundedSemaphore {
+    private int signals = 0;
+    private int bound = 0;
 
-    private int signals;
-    private int bound;
-
-    public BoundedSemaphore(int maxBound) {
-        signals = 0;
-        bound = maxBound;
+    public BoundedSemaphore(int upperBound) {
+        this.bound = upperBound;
     }
 
-    public synchronized void acquire() {
-        while (this.signals == this.bound) {
-            try {
-                wait();
-            } catch (InterruptedException ex) {}
-        }
+    public synchronized void take() throws InterruptedException {
+        while (this.signals == bound) wait();
         this.signals++;
+        this.notify();
     }
 
-    public synchronized void release() {
-        while (this.signals == 0) {
-            try {
-                wait();
-            } catch (InterruptedException ex) {}
-        }
+    public synchronized void release() throws InterruptedException {
+        while (this.signals == 0) wait();
         this.signals--;
-        notifyAll();
+        this.notify();
     }
 }

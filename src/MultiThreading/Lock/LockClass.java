@@ -69,10 +69,11 @@ public class LockClass {
         Thread.currentThread().interrupt();
         // If we do lock.lock() it will not work properly and wouldn't throw an exception.
         try {
-            lock.lockInterruptibly(); // If a thread in interrupted and tries to lock the lock an exception will be thrown.
-            lock.unlock();
+            lock.lockInterruptibly(); // If a thread in interrupted and tries to lock the lock, an exception will be thrown.
         } catch (InterruptedException e) {
             System.out.println("Thread interrupted");
+        } finally {
+            lock.unlock();
         }
     }
 
@@ -81,12 +82,13 @@ public class LockClass {
 
         try {
             boolean lockSuccess = lock.tryLock();
+            System.out.println("Lock success: " + lockSuccess);
             // Useful in a situation where a thread has other work to do, and wants to get lock as well.
             // Try lock will not respect any fairness guarantees.
 
             // To do so, we've to provide timeout for lock.
             boolean lockSuc = lock.tryLock(1000, TimeUnit.MILLISECONDS);
-            System.out.println("Lock success: " + lockSuccess);
+            System.out.println("Lock success: " + lockSuc);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {

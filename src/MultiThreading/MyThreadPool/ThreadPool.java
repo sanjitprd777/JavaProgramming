@@ -8,42 +8,43 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadPool {
 
-    private BlockingQueue taskQueue = null;
-    private List<ThreadPoolRunnable> poolRunnables;
+    private BlockingQueue<Runnable> taskQueue = null;
+    private final List<ThreadPoolRunnable> poolRunnable;
     private boolean isStopped;
 
     public ThreadPool(int noOfThread, int maxNoOfTask) {
-        taskQueue = new ArrayBlockingQueue(maxNoOfTask);
-        poolRunnables = new ArrayList<>();
+        taskQueue = new ArrayBlockingQueue<>(maxNoOfTask);
+        poolRunnable = new ArrayList<>();
         isStopped = false;
 
-        for (int i=0; i < noOfThread; ++i) {
+        for (int i = 0; i < noOfThread; ++i) {
             ThreadPoolRunnable threadPoolRunnable = new ThreadPoolRunnable(taskQueue);
-            poolRunnables.add(threadPoolRunnable);
+            poolRunnable.add(threadPoolRunnable);
         }
 
-        for (ThreadPoolRunnable runnable : poolRunnables) {
+        for (ThreadPoolRunnable runnable : poolRunnable) {
             new Thread(runnable).start();
         }
     }
 
     public synchronized void execute(Runnable task) {
-        if(this.isStopped) throw new IllegalStateException("ThreadPool is stopped");
+        if (this.isStopped) throw new IllegalStateException("ThreadPool is stopped");
 
-        this.taskQueue.offer(task);
+        this.taskQueue.add(task);
     }
 
-    public synchronized void stop() {
+    public synchronized void shutdown() {
         this.isStopped = true;
-        for (ThreadPoolRunnable runnable : poolRunnables)
+        for (ThreadPoolRunnable runnable : poolRunnable)
             runnable.doStop();
     }
 
     public synchronized void waitUntilAllTasksFinished() {
-        while (this.taskQueue.size() > 0) {
+        while (!this.taskQueue.isEmpty()) {
             try {
                 TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ex) {}
+            } catch (InterruptedException ex) {
+            }
         }
     }
 }

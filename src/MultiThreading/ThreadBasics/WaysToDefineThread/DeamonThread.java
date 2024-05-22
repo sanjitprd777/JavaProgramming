@@ -23,7 +23,7 @@ public class DeamonThread {
 
         // The thread-MyRunnable will not stop even if the Main thread exits.
         // To do so, we've to mark the thread as Daemon thread.
-        // Also, a thread can be marked daemon before it starts.
+        // Also, a thread can be marked daemon only before it starts.
         th.setDaemon(true);
         th.start();
 

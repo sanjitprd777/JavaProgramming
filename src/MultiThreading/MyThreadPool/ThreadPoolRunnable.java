@@ -5,22 +5,22 @@ import java.util.concurrent.BlockingQueue;
 public class ThreadPoolRunnable implements Runnable {
 
     private Thread thread = null;
-    private BlockingQueue taskQueue = null;
+    private BlockingQueue<Runnable> taskQueue = null;
     private Boolean isStopped = null;
 
-    public ThreadPoolRunnable(BlockingQueue queue) {
+    public ThreadPoolRunnable(BlockingQueue<Runnable> queue) {
         taskQueue = queue;
         isStopped = false;
     }
-
 
     public void run() {
         this.thread = Thread.currentThread();
         while (!this.isStopped) {
             try {
-                Runnable runnable = (Runnable) taskQueue.take();
-                runnable.run();
-            } catch (Exception e) {}
+                taskQueue.take().run();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 

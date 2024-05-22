@@ -6,8 +6,7 @@ public class ReentrantLockEx {
     Thread lockedBy = null;
     int lockedCount = 0;
 
-    public synchronized void lock()
-            throws InterruptedException {
+    public synchronized void lock() throws InterruptedException {
         Thread callingThread = Thread.currentThread();
         while (isLocked && lockedBy != callingThread) {
             wait();
@@ -16,7 +15,6 @@ public class ReentrantLockEx {
         lockedCount++;
         lockedBy = callingThread;
     }
-
 
     public synchronized void unlock() {
         if (Thread.currentThread() == this.lockedBy) {

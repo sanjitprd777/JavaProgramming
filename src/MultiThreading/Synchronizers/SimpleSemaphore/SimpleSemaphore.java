@@ -3,7 +3,7 @@ package MultiThreading.Synchronizers.SimpleSemaphore;
 public class SimpleSemaphore {
     private boolean signal = false;
 
-    public synchronized void take() {
+    public synchronized void acquire() {
         this.signal = true;
         this.notify();
     }

@@ -12,13 +12,13 @@ public class StaticSync {
         return obj;
     }
 
-    public static synchronized void setObj(Object o) {
+    public static void setObj(Object o) {
         synchronized (StaticSync.class) {
             obj = o;
         }
     }
 
-    public static synchronized Object getObj() {
+    public static Object getObj() {
         synchronized (StaticSync.class) {
             return obj;
         }

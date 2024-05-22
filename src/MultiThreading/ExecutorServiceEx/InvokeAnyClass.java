@@ -36,7 +36,7 @@ public class InvokeAnyClass {
         ExecutorService executorService1 = Executors.newFixedThreadPool(3);
         try {
             List<Future<String>> futures = executorService1.invokeAll(callableList);
-            for (Future f : futures)
+            for (Future<String> f : futures)
                 System.out.println(f.get());
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class InvokeAnyClass {
 
     }
 
-    public static Callable getCallable(String msg) {
+    public static Callable<String> getCallable(String msg) {
         try {
             Thread.sleep(2000);
         } catch (Exception e) {

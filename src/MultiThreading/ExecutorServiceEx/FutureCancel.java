@@ -14,11 +14,8 @@ public class FutureCancel {
     A single CPU having 8 cores, can execute 8 threads at a time.
     A single CPU has 8 cores, and each core can execute 2 threads, then it can execute 16 threads.
 
-
     If thread is CPU intensive, then it's good not to have more than one thread per CPU.
     If thread is IO intensive, then it's good to have more than one thread per CPU.
-
-
      */
 
     public static void main(String[] args) {

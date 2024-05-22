@@ -23,6 +23,7 @@ neither read nor write access. By calling notifyAll() all waiting threads are aw
 Calling notifyAll() also has another advantage. If multiple threads are waiting for read access and none for write
 access, and unlockWrite() is called, all threads waiting for read access are granted read access at once - not one by one.
  */
+
 public class ReadWriteLock {
 
     private int readers = 0;

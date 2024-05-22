@@ -5,7 +5,7 @@ public class FalseSharingEx {
     /*
     False sharing is a phenomena where data variables are stored close to each other (same CPU cache line), hence when one thread updates one
     variable, it also copies the other variable, and after updating one variable, it invalidates caches for both variables.
-    Hence, another thread has to its own variable again, and it also invalidates first thread variables in cache.
+    Hence, another thread has to load its own variable again, and it also invalidates first thread variables in cache.
     Thus, some extra cost comes in computation when variables are store very close and used by different threads.
      */
 

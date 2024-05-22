@@ -31,7 +31,7 @@ public class ProducerConsumerEx {
         blockingQueue.contains("1");
 
 
-        ** Dequeue metohds
+        ** Dequeue methods
         // Take existing task from queue. Blocked unit no new task present in queue. Throws interruptedException is interrupted during call to take.
         blockingQueue.take();
         // remove given element if present in queue.

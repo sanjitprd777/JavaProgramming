@@ -33,7 +33,7 @@ public class Solution {
      */
     public int search(int beginPos, int endPos) {
         // --- write your code here ---
-        System.out.println(beginPos + " " + endPos);
+//        System.out.println(beginPos + " " + endPos);
         for (int i=beginPos; i<=endPos; ++i) {
             if (target == array[i])
                 return i;

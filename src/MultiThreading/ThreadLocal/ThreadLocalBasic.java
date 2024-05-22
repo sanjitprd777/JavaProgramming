@@ -10,8 +10,6 @@ public class ThreadLocalBasic {
 
     We can also create a ThreadLocal with initial value;
     Each thread creates its own initial value of thread local. They do not share the objects initialized in threadlocal.
-
-
      */
 
     public static void main(String[] args) {

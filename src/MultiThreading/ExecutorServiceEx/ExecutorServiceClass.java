@@ -48,6 +48,21 @@ public class ExecutorServiceClass {
             e.printStackTrace();
         }
         executorService.shutdown();
+
+        /*
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        };
+        Callable<String> c = new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return "";
+            }
+        };
+        */
     }
 
     private static Runnable getRunnable(String msg) {

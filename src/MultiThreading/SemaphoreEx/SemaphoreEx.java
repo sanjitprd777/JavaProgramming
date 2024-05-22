@@ -15,7 +15,7 @@ public class SemaphoreEx {
      */
 
     /*
-    In short, support there are 100 (N) threads each wants to access a resource which is only 10 (K). Now, if threads
+    In short, suppose there are 100 (N) threads each wants to access a resource which is only 10 (K). Now, if threads
     occupy all resources, other threads must wait for a resource to get released. Once a resource is released, it is
     picked by any threads waiting for the resource.
      */
@@ -25,7 +25,7 @@ public class SemaphoreEx {
     A semaphore initialized to one, and which is used such that it only has at most one permit available, can serve as
     a mutual exclusion lock. This is more commonly known as a binary semaphore, because it only has two states:
     one permit available, or zero permits available. When used in this way, the binary semaphore has the property
-    (unlike many java. util. concurrent. locks. Lock implementations), that the "lock" can be released by a thread other
+    (unlike many java.util.concurrent.locks.Lock implementations), that the "lock" can be released by a thread other
     than the owner (as semaphores have no notion of ownership). This can be useful in some specialized contexts,
     such as deadlock recovery.
      */

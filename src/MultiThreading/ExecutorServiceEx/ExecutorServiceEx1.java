@@ -14,6 +14,10 @@ public class ExecutorServiceEx1 {
      */
 
     public static void main(String[] args) {
+
+        // Single thread pool executor.
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
         // Start out by having 10 threads in pool.
         int corePoolSize = 10;
         int maxPoolSize = 20; // If tasks are more than threads to handle, it inc thread count to 20
@@ -29,12 +33,8 @@ public class ExecutorServiceEx1 {
         threadPoolExecutor.submit(() -> System.out.printf("Hiii"));
         threadPoolExecutor.execute(() -> System.out.printf("Hiii"));
         threadPoolExecutor.shutdown();
-        // Both corePoolSize and maxPoolSize will be 3.
-        ExecutorService threadPoolExecutor1 = Executors.newFixedThreadPool(3);
 
-        // The shutdown method waits until all threads submitted to executor service finish execution.
-        threadPoolExecutor1.shutdown();
-        Executors.newSingleThreadExecutor();
+        // Both corePoolSize and maxPoolSize will be 3.
         ThreadPoolExecutor threadPoolExecutor2 = new ThreadPoolExecutor(
                 3,
                 3,
@@ -42,20 +42,23 @@ public class ExecutorServiceEx1 {
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>());
 
+        // Using in-build function.
+        ExecutorService threadPoolExecutor1 = Executors.newFixedThreadPool(3);
+        // The shutdown method waits until all threads submitted to executor service finish execution.
+        threadPoolExecutor1.shutdown();
+
         // It attempts to stop all tasks that are currently in execution. Not guarantee to stop always.
         // It immediately exits, hence all queue tasks will get canceled. All non-executed tasks will be
         // returned as a list of runnable.
         List<Runnable> runnables = threadPoolExecutor1.shutdownNow();
         // The list will contain runnable tasks in queue and gets canceled.
 
-        // But what will happen with tasks that ExecutorService is trying to cancel, but it is unable to cancel it.
+        // But what will happen with tasks that ExecutorService is trying to cancel, but it is unable to cancel it?
         try {
-            // It can use await termination with timeout. It will wait executorService to wait for a remaining task.
+            // It can use await termination with timeout.
+            // It will wait executorService to wait for a remaining task for a given time period.
             threadPoolExecutor1.awaitTermination(3000L, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-
+        } catch (InterruptedException ex) {ex.printStackTrace();}
 
         ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(corePoolSize);
 

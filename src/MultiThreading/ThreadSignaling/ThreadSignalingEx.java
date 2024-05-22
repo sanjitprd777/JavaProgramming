@@ -19,10 +19,8 @@ public class ThreadSignalingEx {
     notifyAll: All threads will be notified with notifyAll previously hold lock on the same object.
     After notifyAll, one by one all threads will resume and exit the wait method.
 
-
     Spurious Wakeup situations with wait in thread:
     A thread calling wait exits wait without any notify calls.
-
      */
 
     public static void main(String[] args) {

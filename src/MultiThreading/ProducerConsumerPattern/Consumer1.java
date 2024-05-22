@@ -17,6 +17,7 @@ public class Consumer1 implements Runnable {
                 System.out.println(Thread.currentThread().getName() + " : " + blockingQueue.take());
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
         }
     }

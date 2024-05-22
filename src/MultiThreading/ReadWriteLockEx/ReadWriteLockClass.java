@@ -25,13 +25,9 @@ public class ReadWriteLockClass {
         Thread[] th = new Thread[n];
         for (int i=0; i<n;++i) {
             if (i%3!=0) {
-                th[i] = new Thread(() -> {
-                    hashMapEx.put(random.nextInt(5), random.nextInt(50));
-                });
+                th[i] = new Thread(() -> hashMapEx.put(random.nextInt(5), random.nextInt(50)));
             } else {
-                th[i] = new Thread(() -> {
-                    System.out.println(hashMapEx.get(random.nextInt(5)));
-                });
+                th[i] = new Thread(() -> System.out.println(hashMapEx.get(random.nextInt(5))));
             }
         }
 

@@ -3,7 +3,7 @@ package MultiThreading.Synchronizers.CountingSemaphore;
 public class CountingSemaphore {
     private int signals = 0;
 
-    public synchronized void take() {
+    public synchronized void acquire() {
         this.signals++;
         this.notify();
     }
@@ -12,5 +12,4 @@ public class CountingSemaphore {
         while(this.signals == 0) wait();
         this.signals--;
     }
-
 }

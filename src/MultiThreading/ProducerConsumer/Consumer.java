@@ -18,6 +18,7 @@ public class Consumer implements Runnable {
                 System.out.println("Consumed: " + element);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }
