@@ -1,6 +1,5 @@
 package MultiThreading.CompletableFutureEx;
 
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +31,7 @@ public class AllOfandAnyOf {
         return CompletableFuture.supplyAsync(() -> {
             System.out.println("Running CF1 in thread: " + Thread.currentThread().getName());
             delay(2);
-           return "CF1";
+            return "CF1";
         });
     }
 
@@ -52,16 +51,24 @@ public class AllOfandAnyOf {
         });
     }
 
+    public static CompletableFuture<Integer> cf4() {
+        return CompletableFuture.supplyAsync(() -> {
+            System.out.println("Running CF3 in thread: " + Thread.currentThread().getName());
+            delay(4);
+            return 55;
+        });
+    }
+
     public static void main(String[] args) {
         long st = System.currentTimeMillis();
-        CompletableFuture<Void> cf = CompletableFuture.allOf(cf1(), cf2(), cf3());
+        CompletableFuture<Void> cf = CompletableFuture.allOf(cf1(), cf2(), cf3(), cf4());
         cf.join();
         long et = System.currentTimeMillis();
         System.out.println("Total time taken for allOf (longest running): " + (et - st));
 
 
         st = System.currentTimeMillis();
-        CompletableFuture<Object> cf1 = CompletableFuture.anyOf(cf1(), cf2(), cf3());
+        CompletableFuture<Object> cf1 = CompletableFuture.anyOf(cf1(), cf2(), cf3(), cf4());
         System.out.println(cf1.join());
         et = System.currentTimeMillis();
         System.out.println("Total time taken for anyOf (fastest running): " + (et - st));

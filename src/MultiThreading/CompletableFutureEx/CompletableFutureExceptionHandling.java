@@ -24,7 +24,7 @@ public class CompletableFutureExceptionHandling {
                 throw new RuntimeException("Error at future");
             return "Success at future";
         }).handle((s, e) -> {
-            if (e!=null) {
+            if (e != null) {
                 System.out.println(e.getMessage());
                 return "Error string";
             }
@@ -39,7 +39,7 @@ public class CompletableFutureExceptionHandling {
                 throw new RuntimeException("Error at future");
             return "Success at future";
         }).handle((s, e) -> {
-            if (e!=null) {
+            if (e != null) {
                 System.out.println(e.getMessage());
                 return "Error string";
             }
@@ -56,10 +56,25 @@ public class CompletableFutureExceptionHandling {
                 throw new RuntimeException("Error at future");
             return "Success at future";
         }).exceptionally(e -> {
-                System.out.println(e.getMessage());
-                return "Error string";
+            System.out.println(e.getMessage());
+            return "Error string";
         });
 
         System.out.println(cf2.join());
+
+        System.out.println();
+        System.out.println("In Main, handling exception via exceptionally");
+        boolean error3 = false;
+        CompletableFuture<String> cf3 = CompletableFuture.supplyAsync(() -> {
+            if (error3)
+                throw new RuntimeException("Error at future");
+            return "Success at future";
+        }).exceptionally(e -> {
+            System.out.println(e.getMessage());
+            return "Error string";
+        });
+
+        System.out.println(cf3.join());
+
     }
 }

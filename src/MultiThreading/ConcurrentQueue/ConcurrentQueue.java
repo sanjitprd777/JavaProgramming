@@ -19,13 +19,17 @@ public class ConcurrentQueue {
     Lock lock = new ReentrantLock();
 
     void enqueue(Integer val) {
-        lock.lock();
+        try {
+            lock.lock();
 //        synchronized (obj) {
 //            countAdd++;
-        countAdd.incrementAndGet();
-        queue.add(val);
+            countAdd.incrementAndGet();
+            queue.add(val);
 //        }
-        lock.unlock();
+        } finally {
+            lock.unlock();
+
+        }
     }
 
     synchronized void dequeue() {

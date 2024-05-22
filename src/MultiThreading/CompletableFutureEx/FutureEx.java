@@ -15,12 +15,12 @@ public class FutureEx {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Callable<String> callable = new Callable<String> () {
-          @Override
-          public String call() throws InterruptedException {
-              TimeUnit.SECONDS.sleep(1);
-              return "Hello from Future";
-          }
+        Callable<String> callable = new Callable<String>() {
+            @Override
+            public String call() throws InterruptedException {
+                TimeUnit.SECONDS.sleep(1);
+                return "Hello from Future";
+            }
         };
 
         Future<String> f = executorService.submit(callable);

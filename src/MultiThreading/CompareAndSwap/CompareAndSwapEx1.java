@@ -28,7 +28,6 @@ public class CompareAndSwapEx1 {
         th4.start();
         System.out.println("Updated value: " + integer.get());
     }
-
     public static void main(String[] args) {
         CompareAndSwapEx1 compareAndSwapEx1 = new CompareAndSwapEx1();
         compareAndSwapEx1.execute();

@@ -42,7 +42,7 @@ public class CombiningIndependentFuture {
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-        CompletableFuture<String> cf = getUserEmail().thenCombine(getWeather(), (e, w) -> {
+        CompletableFuture<String> cf = getUserEmail().thenCombineAsync(getWeather(), (e, w) -> {
             System.out.println("Sending email to " + e + " with report " + w);
             delay(2);
             return e + " " + w;

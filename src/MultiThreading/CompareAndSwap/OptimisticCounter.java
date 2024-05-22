@@ -11,6 +11,8 @@ public class OptimisticCounter {
 
     public void inc() {
         // Allowing multiple thread to enter into a critical section, but only allowing one thread to update at a time.
+        // Pros: Waiting threads spend less time waiting to update.
+        // Cons: More CPU cycle wasted by waiting threads.
         boolean isSuccess = false;
         while (!isSuccess) {
             long val = this.count.get();

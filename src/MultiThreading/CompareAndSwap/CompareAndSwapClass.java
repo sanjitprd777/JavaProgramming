@@ -11,7 +11,7 @@ public class CompareAndSwapClass {
     /*
     Synchronized block VS Atomic Operation:
     Synchronized Block:
-    In synchronized block the blocking/unblocking of thread from entering into sync block is handled at JVV/OS level.
+    In synchronized block the blocking/unblocking of thread from entering into sync block is handled at JVM/OS level.
     This operation of Java VM or OS level is expensive. When another thread frees the sync block, the JVM/OS does not know
     exactly when sync block is free for other threads. Thus, other blocked threads might be waiting for some extra time-wasting
     some potential execution time. It does not take CPU time, however.
@@ -30,9 +30,23 @@ public class CompareAndSwapClass {
     }
 
     public void lock() {
-        while (!this.atomicBoolean.compareAndSet(false, true)) {
+        Boolean expected = true;
+        while (!this.atomicBoolean.compareAndSet(expected, true)) {
             // busy wait until compareAndSet succeeds.
             // This is an atomic operation, only one thread can execute it at a time.
+            expected = false;
+            System.out.println("Retry after 2sec");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {}
         }
+    }
+
+    public static void main(String[] args) {
+        CompareAndSwapClass cs = new CompareAndSwapClass();
+        cs.lock();
+        System.out.println(cs.atomicBoolean);
+        cs.unlock();
+        System.out.println(cs.atomicBoolean);
     }
 }
