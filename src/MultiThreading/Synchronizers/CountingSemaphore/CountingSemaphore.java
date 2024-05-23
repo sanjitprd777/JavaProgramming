@@ -1,15 +1,26 @@
 package MultiThreading.Synchronizers.CountingSemaphore;
 
 public class CountingSemaphore {
-    private int signals = 0;
+    int usedPermits = 0; // permits given out
+    int maxCount; // max permits to give out
 
-    public synchronized void acquire() {
-        this.signals++;
-        this.notify();
+    public CountingSemaphore(int count) {
+        this.maxCount = count;
     }
 
-    public synchronized void release() throws InterruptedException{
-        while(this.signals == 0) wait();
-        this.signals--;
+    public synchronized void acquire() throws InterruptedException {
+        while (usedPermits == maxCount)
+            wait();
+
+        usedPermits++;
+        notify();
+    }
+
+    public synchronized void release() throws InterruptedException {
+        while (usedPermits == 0)
+            wait();
+
+        usedPermits--;
+        notify();
     }
 }
