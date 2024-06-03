@@ -3,7 +3,7 @@ package LambdaExpression;
 /*
 Lambda Expression:
 We can represent an Anonymous function.
-Anonymous: Nameless/Unknown A method who don't have any name or modifier.
+Anonymous: Nameless/Unknown A method who doesn't have any name or modifier.
 
 Syntax: Parameter  Expression  Body
         ()          ->          System.out.println("Lambda Syntax");

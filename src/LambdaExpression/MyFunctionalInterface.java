@@ -2,7 +2,8 @@ package LambdaExpression;
 
 @FunctionalInterface
 public interface MyFunctionalInterface {
-    public abstract void m1();
+    // All interface methods are by default public and abstract (non static and non default).
+    void m1();
 
     static void m2() {
         System.out.println("I'm static");

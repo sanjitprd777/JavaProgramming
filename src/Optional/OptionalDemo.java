@@ -20,9 +20,8 @@ public class OptionalDemo {
         // Use Optional.ofNullable when we know that object could be either null or not null.
         // If the value is present, it does Optional.of check otherwise returns Optional.empty;
         Optional<String> emailOptionalNull = Optional.ofNullable(customer.getEmail());
-        if (emailOptionalNull.isPresent()) { // Check if any value is present or not.
-            System.out.println(emailOptionalNull.get());
-        }
+        // Check if any value is present or not.
+        emailOptionalNull.ifPresent(System.out::println);
 
         // Either return actual value is present or default value.
         System.out.println(emailOptionalNull.orElse("default@email.com"));

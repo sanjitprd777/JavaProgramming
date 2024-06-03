@@ -16,7 +16,6 @@ public class GenericsBasics {
     Java Generics add type parameters to classes, interfaces, methods and variables that decide to use them. To be able
     to use a type parameter with a class, interface, method or variable the type you are trying to add the type
     parameter to, must be designed to allow generic type parameters.
-
     */
 
     public static void main(String[] args) {
@@ -50,7 +49,7 @@ public class GenericsBasics {
         But how does java know about the type of element the collection can store?
 
         The Java generics features were updated in Java 7. From Java 7, the Java compiler can infer the type of the
-        collection instantiated from the variable the collection is assigned to
+        collection instantiated from the variable the collection is assigned to.
          */
 
         List<String> strings = new ArrayList<>();
@@ -63,7 +62,6 @@ public class GenericsBasics {
 
         /*
         Iterate Generic collections.
-
         Earlier we used iterator to iterate collections using hasNext() and next() functions in a while loop.
          */
         Iterator<String> stringIterator = list1.iterator();

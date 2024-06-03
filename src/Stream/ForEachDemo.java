@@ -17,7 +17,7 @@ public class ForEachDemo {
         System.out.println();
 
         // Using stream API
-        list.stream().forEach(s -> System.out.println(s));
+        list.stream().forEach(System.out::println);
         System.out.println();
 
         Map<Integer, String> map = new HashMap<>();

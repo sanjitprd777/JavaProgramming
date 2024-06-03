@@ -18,7 +18,7 @@ public class MapVsFlatMap {
         // Get a phone numbers list from all customers.
         // Mapping logic: customer -> customer.getPhoneNumbers()
         // This is one to many mapping (why?) Bcz one customer has multiple phone numbers.
-        List<List<String>> phoneNumbers = customers.stream().map(customer -> customer.getPhoneNumbers()).collect(Collectors.toList());
+        List<List<String>> phoneNumbers = customers.stream().map(Customer::getPhoneNumbers).collect(Collectors.toList());
         System.out.println(phoneNumbers);
 
         // Fix using 'flatMap'

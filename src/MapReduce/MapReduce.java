@@ -9,7 +9,7 @@ public class MapReduce {
 
         List<Integer> numbers = Arrays.asList(3,5,7,8,4,2,1,5,7);
 
-//        Integer sum = numbers.stream().mapToInt(i->i).reduce(0, (a, b) -> a+b);
+        // Integer sum = numbers.stream().mapToInt(i->i).reduce(0, (a, b) -> a+b);
         // Get sum using method
         int sum = numbers.stream().mapToInt(i -> i).sum();
         System.out.println(sum);

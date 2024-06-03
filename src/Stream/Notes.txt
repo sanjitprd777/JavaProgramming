@@ -5,7 +5,7 @@ A stream is a sequence of objects that supports various methods which can be pip
 
 Stream is not data structures; it takes input from collection, array or I/O channel.
 
-It does not change the original data, it provides the result as per pilelined methods.
+It does not change the original data, it provides the result as per pipelined methods.
 
 Why we need it?
 - Achieve functional programming
@@ -13,5 +13,5 @@ Why we need it?
 - Bulk operations
 
 Methods:
-Filter - for conditional check (Supports consumer functional interface)
-forEach - For iteration (Supports predicate functional interface)
+Filter - for conditional check (Supports predicate functional interface)
+forEach - For iteration (Supports consumer functional interface)

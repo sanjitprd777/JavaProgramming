@@ -11,7 +11,7 @@ List<? super A> means that the list is typed to either the A class, or a supercl
 When you know that the list is typed to either A, or a superclass of A, it is safe to insert instances of A or
 subclasses of A (e.g., B or C) into the list. Here is an example:
 
-public static void insertElements(List<? super A> list){
+public static void insertElements(List<? super A> list) {
     list.add(new A());
     list.add(new B());
     list.add(new C());

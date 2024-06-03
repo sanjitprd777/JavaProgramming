@@ -34,7 +34,7 @@ public class SortDemo {
         books.add(new Book(4, "ef"));
 
         // Traditional sorting way
-        Collections.sort(books, MyComparator.getInstance());
+        books.sort(MyComparator.getInstance());
         Collections.sort(books, MyComparator.getInstance());
         System.out.println(books);
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-//public class PredicateDemo implements Predicate<Integer> {
+// public class PredicateDemo implements Predicate<Integer> {
 //    @Override
 //    public boolean test(Integer integer) {
 //        return integer%2==0;
@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 //        System.out.println(predicate.test(5));
 //        System.out.println(predicate.test(6));
 //    }
-//}
+// }
 
 public class PredicateDemo {
     public static void main(String[] args) {

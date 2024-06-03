@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GenericMethod {
 
-    static <T> T addAndReturn(T element, Collection<T> collector) {
+    static <T> T addAndReturn(T element, List<T> collector) {
         collector.add(element);
         return element;
     }
@@ -21,10 +21,10 @@ public class GenericMethod {
 
     public static void main(String[] args) {
         List<String> strings = new ArrayList<>();
-        addAndReturn("1", strings);
-        addAndReturn("2", strings);
-        addAndReturn("3", strings);
-        addAndReturn("4", strings);
+        addAndReturn("ab", strings);
+        addAndReturn("cd", strings);
+        addAndReturn("ef", strings);
+        addAndReturn("gh", strings);
 
         for (String str : strings)
             System.out.println(str);
@@ -54,8 +54,8 @@ public class GenericMethod {
         Therefore, the compiler will report an error.
 
         Object ele = new Object();
-        List<String> eles = new ArrayList<>();
-        System.out.println(addAndReturn(ele, eles));
+        List<String> elements = new ArrayList<>();
+        System.out.println(addAndReturn(ele, elements));
          */
 
         /*

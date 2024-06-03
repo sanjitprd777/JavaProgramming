@@ -36,7 +36,7 @@ public class MapReduceComplexObject {
         List<Employee> employees = Employee.getEmployee();
 
         // Print average salary of all employees
-        double avgSalary = employees.stream().map(e -> e.getSalary()).mapToDouble(s -> s).average().getAsDouble();
+        double avgSalary = employees.stream().map(Employee::getSalary).mapToDouble(s -> s).average().getAsDouble();
         System.out.println("Average salary: " + avgSalary);
 
         // Print the average salary of employees whose name starts with a or A.
