@@ -27,9 +27,11 @@ public class MyBlockingQueue {
         while (this.queue.isEmpty())
             wait();
 
-        if (this.queue.size()==this.limit)
+        Object obj = this.queue.remove();
+
+        if (this.queue.size()==this.limit-1)
             notifyAll();
 
-        return this.queue.remove();
+        return obj;
     }
 }
