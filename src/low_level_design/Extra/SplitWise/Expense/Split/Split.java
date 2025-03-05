@@ -1,4 +1,4 @@
-package SplitWise.Expense.Split;
+package low_level_design.Extra.SplitWise.Expense.Split;
 
 import SplitWise.User.User;
 

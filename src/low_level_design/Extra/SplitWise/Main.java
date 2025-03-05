@@ -8,8 +8,7 @@ import SplitWise.Group.GroupController;
 import SplitWise.User.User;
 import SplitWise.User.UserController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 

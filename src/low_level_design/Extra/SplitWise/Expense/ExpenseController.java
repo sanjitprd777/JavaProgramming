@@ -1,15 +1,12 @@
-package SplitWise.Expense;
+package low_level_design.Extra.SplitWise.Expense;
 
-import SplitWise.Expense.Split.Split;
 import SplitWise.Expense.Split.SplitType;
 import SplitWise.User.Balance;
 import SplitWise.User.BalanceType;
 import SplitWise.User.User;
 import SplitWise.User.UserBalanceSheet;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ExpenseController {
 
