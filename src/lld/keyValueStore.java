@@ -6,7 +6,10 @@ import java.util.concurrent.locks.*;
 public class keyValueStore {
 
 	static class KeyValueStore<K, V> {
+		// ConcurrentHashMap is thread-safe, so no need for handling synchronization.
+		// If we use HashMap, we will get ConcurrentModificationException when one thread is reading while other is updating.
 		private final ConcurrentHashMap<K, V> store;
+		// We need a lock because we can maintain order of updates.
 		private final ReentrantLock lock;
 
 		public KeyValueStore() {
@@ -50,8 +53,7 @@ public class keyValueStore {
 
 		Runnable updateTask = () -> {
 			for (int i = 0; i < 1000; i++) {
-				int currentValue = store.getByKey("counter");
-				store.updateValueByKey("counter", currentValue + 1);
+				store.updateValueByKey("counter", store.getByKey("counter") + 1);
 			}
 		};
 
