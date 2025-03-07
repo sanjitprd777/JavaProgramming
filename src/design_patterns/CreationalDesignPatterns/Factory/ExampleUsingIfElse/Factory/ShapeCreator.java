@@ -1,6 +1,6 @@
-package CreationalDesignPatterns.Factory.ExampleUsingIfElse.Factory;
+package design_patterns.CreationalDesignPatterns.Factory.ExampleUsingIfElse.Factory;
 
-import CreationalDesignPatterns.Factory.ExampleUsingIfElse.Products.Shape;
+import design_patterns.CreationalDesignPatterns.Factory.ExampleUsingIfElse.Products.Shape;
 
 public class ShapeCreator {
 
