@@ -1,73 +1,175 @@
+/**
+
+Design and implement an in-memory key value data store.
+This data store should be able to support some basic operations such as Get, Set and Delete for string keys and values.
+
+I would like to see test cases as well as implementation code.
+You can assume that the input operations are always valid, but the key to operate on may be non-existent.
+
+We won't worry about concurrent access to the database.
+You can handle errors however you think is best.
+Let's start with the data structure of this key value store.
+
+Implement methods for Get, Set and Delete.
+
+
+Add support for transactions - Begin, Commit and Rollback.
+
+A transaction is created with the Begin command and creates a context for the other operations to happen.
+Until the active transaction is committed using the Commit command, those operations do not persist.
+The Rollback command throws away any changes made by those operations in the context of the active transaction.
+
+"Commit()" and "Rollback()" will only happen when inside a transaction, and they both end the transaction.
+Note: We won't worry about concurrency for this part of the question.
+
+The following examples demonstrate how this might work:
+
+Example 1
+---------
+
+* Set ``key0`` to ``val0``
+* Get ``key0``
+  * Expect ``val0``
+* Begin transaction
+* Within transaction: Get ``key0``
+  * Expect ``val0``
+* Within transaction: Set ``key1`` to ``val1``
+* Within transaction: Get ``key1``
+  * Expect ``val1``
+* Commit transaction
+* Outside the transaction: Get ``key1``
+  * Expect ``val1``
+
+Example 2
+---------
+
+* Begin transaction
+* Set ``key2`` to ``val2``
+* Get ``key2``
+  * Expect ``val2``
+* Rollback
+* Get ``key2``
+  * Expect an error case as ``key2`` is not set
+
+*/
+
 package lld;
 
-import java.util.concurrent.*;
-import java.util.concurrent.locks.*;
+import java.lang.*;
+import java.util.*;
 
-public class keyValueStore {
+class KeyValueStore {
+    HashMap<String, String> kvStore, transactionStore;
+    HashSet<String> transactionDeletedKeys;
+    public boolean inTransaction;
 
-	static class KeyValueStore<K, V> {
-		// ConcurrentHashMap is thread-safe, so no need for handling synchronization.
-		// If we use HashMap, we will get ConcurrentModificationException when one thread is reading while other is updating.
-		private final ConcurrentHashMap<K, V> store;
-		// We need a lock because we can maintain order of updates.
-		private final ReentrantLock lock;
+    public KeyValueStore() {
+        kvStore = new HashMap<>();
+        inTransaction = false;
+    }
 
-		public KeyValueStore() {
-			this.store = new ConcurrentHashMap<>();
-			this.lock = new ReentrantLock();
-		}
+    // Space Complexity: O(Count of keys)
+    // Time Complexity:  O(1)
+    public void set(String Key, String Value) {
+        if (inTransaction) {
+            transactionDeletedKeys.remove(Key);
+            transactionStore.put(Key, Value);
+        } else {
+            kvStore.put(Key, Value);
+        }
+    }
 
-		// Get value by key
-		public V getByKey(K key) {
-			return store.get(key);
-		}
+    // Time Complexity:  O(1)
+    public String get(String key) throws Exception {
+        if (inTransaction) {
+            if (transactionStore.containsKey(key)) {
+                return transactionStore.get(key);
+            }
 
-		// Insert a new key-value pair
-		public boolean insertKey(K key, V value) {
-			return store.putIfAbsent(key, value) == null; // Only insert if key doesn't exist
-		}
+            if (transactionDeletedKeys.contains(key)) {
+                throw new Exception("Input key %s doesnot exist".formatted(key));
+            }
+        }
 
-		// Update value safely with a lock
-		public boolean updateValueByKey(K key, V newValue) {
-			lock.lock(); // Acquire lock for thread safety
-			try {
-				if (store.containsKey(key)) {
-					store.put(key, newValue);
-					return true;
-				}
-				return false; // Key doesn't exist
-			} finally {
-				lock.unlock(); // Release lock
-			}
-		}
+        if (kvStore.containsKey(key)) {
+            return kvStore.get(key);
+        }
 
-		// Remove a key
-		public boolean removeKey(K key) {
-			return store.remove(key) != null;
-		}
-	}
+        throw new Exception("Input key %s doesnot exist".formatted(key));
+    }
 
-	public static void main(String[] args) throws InterruptedException {
-		KeyValueStore<String, Integer> store = new KeyValueStore<>();
-		store.insertKey("counter", 0);
+    // Time Complexity:  O(1)
+    public boolean delete(String key) {
+        if (inTransaction) {
+            transactionDeletedKeys.add(key);
+            return (transactionStore.remove(key) != null);
+        }
 
-		Runnable updateTask = () -> {
-			for (int i = 0; i < 1000; i++) {
-				store.updateValueByKey("counter", store.getByKey("counter") + 1);
-			}
-		};
+        return (kvStore.remove(key) != null);
+    }
 
-		// Create two threads updating the same key
-		Thread thread1 = new Thread(updateTask);
-		Thread thread2 = new Thread(updateTask);
+    // Time Complexity:  O(1)
+    public void beginTransaction() {
+        inTransaction = true;
+        transactionStore = new HashMap<>();
+        transactionDeletedKeys = new HashSet<>();
+    }
 
-		thread1.start();
-		thread2.start();
+    // Time Complexity:  O(count of keys in transactionStore + transactionDeletedKeys)
+    public void commitTransaction() {
+        if (transactionStore != null) {
+            for (Map.Entry<String, String> entry : transactionStore.entrySet()) {
+                kvStore.put(entry.getKey(), entry.getValue());
+            }
 
-		thread1.join();
-		thread2.join();
+            for (String deletedKey : transactionDeletedKeys) {
+                kvStore.remove(deletedKey);
+            }
+        }
+        transactionStore = null;
+        inTransaction = false;
+    }
 
-		System.out.println("Final Counter Value: " + store.getByKey("counter"));
-	}
-
+    // Time Complexity:  O(1)
+    public void rollbackTransaction() {
+        transactionStore = null;
+        inTransaction = false;
+    }
 }
+
+class Solution {
+
+
+    public static void main(String[] args) {
+        KeyValueStore kvStore = new KeyValueStore();
+/*
+        kvStore.beginTransaction();
+        kvStore.commitTransaction();
+        kvStore.rollbackTransaction();
+        try {
+            String value = kvStore.get("key0");
+            System.out.println(value);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+*/
+
+        kvStore.beginTransaction();
+        kvStore.set("key0", "val0");
+        kvStore.delete("key0");
+        kvStore.set("key0", "val0");
+        kvStore.commitTransaction();
+
+        try {
+            String value = kvStore.get("key0");
+            System.out.println(value);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+
+
+    }
+}
+
+

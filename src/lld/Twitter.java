@@ -1,4 +1,4 @@
-package LLD;
+package lld;
 
 import java.io.*;
 import java.util.*;
@@ -99,7 +99,7 @@ public class Twitter {
         public List<Tweet> getUserFeed(User user) {
             HashSet<User> followees = user.followees;
 
-            List<Tweet> tweets = new ArrayList<>();
+            List<Tweet> tweets = user.tweets;
 
             for (User u : followees) {
                 for (Tweet tweet : u.tweets) {
@@ -154,14 +154,28 @@ public class Twitter {
         userService.addFollower(user1, user3);
 
         tweetService.createTweet(user2, "Sanjit2 make a tweet!!!");
-        List<Tweet> tweets = userService.getUserFeed(user1);
+
+        List<Tweet> tweets = userService.getUserFeed(user2);
         for (Tweet tweet : tweets) {
+            System.out.println(tweet.id + " : " + tweet.description + " : " + tweet.timestamp);
+        }
+
+
+        List<Tweet> tweets1 = userService.getUserFeed(user1);
+        for (Tweet tweet : tweets1) {
             System.out.println(tweet.id + " : " + tweet.description + " : " + tweet.timestamp);
         }
 
         System.out.println();
 
         tweetService.createTweet(user3, "Sanjit3 make a tweet!!!");
+
+        List<Tweet> tweets3 = userService.getUserFeed(user3);
+        for (Tweet tweet : tweets3) {
+            System.out.println(tweet.id + " : " + tweet.description + " : " + tweet.timestamp);
+        }
+
+
         List<Tweet> tweets2 = userService.getUserFeed(user1);
         for (Tweet tweet : tweets2) {
             System.out.println(tweet.id + " : " + tweet.description + " : " + tweet.timestamp);
