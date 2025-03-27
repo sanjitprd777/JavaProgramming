@@ -1,6 +1,5 @@
 package lld;
 
-import java.io.*;
 import java.util.*;
 
 /* Design an in-memory version of twitter */

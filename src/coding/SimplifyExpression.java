@@ -78,7 +78,7 @@ class Solution {
     }
 }
 
-public class Coding {
+public class SimplifyExpression {
     
     public static void main(String[] args) {
         Solution s = new Solution();
