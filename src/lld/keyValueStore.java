@@ -58,87 +58,86 @@ package lld;
 import java.lang.*;
 import java.util.*;
 
-class KeyValueStore {
-    HashMap<String, String> kvStore, transactionStore;
-    HashSet<String> transactionDeletedKeys;
-    public boolean inTransaction;
-
-    public KeyValueStore() {
-        kvStore = new HashMap<>();
-        inTransaction = false;
-    }
-
-    // Space Complexity: O(Count of keys)
-    // Time Complexity:  O(1)
-    public void set(String Key, String Value) {
-        if (inTransaction) {
-            transactionDeletedKeys.remove(Key);
-            transactionStore.put(Key, Value);
-        } else {
-            kvStore.put(Key, Value);
-        }
-    }
-
-    // Time Complexity:  O(1)
-    public String get(String key) throws Exception {
-        if (inTransaction) {
-            if (transactionStore.containsKey(key)) {
-                return transactionStore.get(key);
-            }
-
-            if (transactionDeletedKeys.contains(key)) {
-                throw new Exception("Input key %s doesnot exist".formatted(key));
-            }
-        }
-
-        if (kvStore.containsKey(key)) {
-            return kvStore.get(key);
-        }
-
-        throw new Exception("Input key %s doesnot exist".formatted(key));
-    }
-
-    // Time Complexity:  O(1)
-    public boolean delete(String key) {
-        if (inTransaction) {
-            transactionDeletedKeys.add(key);
-            return (transactionStore.remove(key) != null);
-        }
-
-        return (kvStore.remove(key) != null);
-    }
-
-    // Time Complexity:  O(1)
-    public void beginTransaction() {
-        inTransaction = true;
-        transactionStore = new HashMap<>();
-        transactionDeletedKeys = new HashSet<>();
-    }
-
-    // Time Complexity:  O(count of keys in transactionStore + transactionDeletedKeys)
-    public void commitTransaction() {
-        if (transactionStore != null) {
-            for (Map.Entry<String, String> entry : transactionStore.entrySet()) {
-                kvStore.put(entry.getKey(), entry.getValue());
-            }
-
-            for (String deletedKey : transactionDeletedKeys) {
-                kvStore.remove(deletedKey);
-            }
-        }
-        transactionStore = null;
-        inTransaction = false;
-    }
-
-    // Time Complexity:  O(1)
-    public void rollbackTransaction() {
-        transactionStore = null;
-        inTransaction = false;
-    }
-}
-
 class Solution {
 
+    static class KeyValueStore {
+        HashMap<String, String> kvStore, transactionStore;
+        HashSet<String> transactionDeletedKeys;
+        public boolean inTransaction;
+
+        public KeyValueStore() {
+            kvStore = new HashMap<>();
+            inTransaction = false;
+        }
+
+        // Space Complexity: O(Count of keys)
+        // Time Complexity:  O(1)
+        public void set(String Key, String Value) {
+            if (inTransaction) {
+                transactionDeletedKeys.remove(Key);
+                transactionStore.put(Key, Value);
+            } else {
+                kvStore.put(Key, Value);
+            }
+        }
+
+        // Time Complexity:  O(1)
+        public String get(String key) throws Exception {
+            if (inTransaction) {
+                if (transactionStore.containsKey(key)) {
+                    return transactionStore.get(key);
+                }
+
+                if (transactionDeletedKeys.contains(key)) {
+                    throw new Exception("Input key %s doesnot exist".formatted(key));
+                }
+            }
+
+            if (kvStore.containsKey(key)) {
+                return kvStore.get(key);
+            }
+
+            throw new Exception("Input key %s doesnot exist".formatted(key));
+        }
+
+        // Time Complexity:  O(1)
+        public boolean delete(String key) {
+            if (inTransaction) {
+                transactionDeletedKeys.add(key);
+                return (transactionStore.remove(key) != null);
+            }
+
+            return (kvStore.remove(key) != null);
+        }
+
+        // Time Complexity:  O(1)
+        public void beginTransaction() {
+            inTransaction = true;
+            transactionStore = new HashMap<>();
+            transactionDeletedKeys = new HashSet<>();
+        }
+
+        // Time Complexity:  O(count of keys in transactionStore + transactionDeletedKeys)
+        public void commitTransaction() {
+            if (transactionStore != null) {
+                for (Map.Entry<String, String> entry : transactionStore.entrySet()) {
+                    kvStore.put(entry.getKey(), entry.getValue());
+                }
+
+                for (String deletedKey : transactionDeletedKeys) {
+                    kvStore.remove(deletedKey);
+                }
+            }
+            transactionStore = null;
+            inTransaction = false;
+        }
+
+        // Time Complexity:  O(1)
+        public void rollbackTransaction() {
+            transactionStore = null;
+            inTransaction = false;
+        }
+    }
 
     public static void main(String[] args) {
         KeyValueStore kvStore = new KeyValueStore();
@@ -166,10 +165,5 @@ class Solution {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
-
-
     }
 }
-
-

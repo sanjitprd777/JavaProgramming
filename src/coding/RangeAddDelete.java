@@ -2,10 +2,6 @@ package coding;
 
 import java.util.*;
 
-/*
- */
-
-
 class RangeModule {
     TreeSet<Integer[]> ts;
     public RangeModule() {
@@ -76,7 +72,6 @@ class RangeModule {
         }
     }
 }
-    
 
 public class RangeAddDelete {
     

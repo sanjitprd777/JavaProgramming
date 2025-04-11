@@ -49,7 +49,11 @@ public class dsu {
 			}
 		}
 		for (int i = 0; i < queries.length; ++i)
-			ans.add(d.getPar(queries[i][0]) == d.getPar(queries[i][1]));
+			ans.add(Boolean.valueOf(d.getPar(queries[i][0]) == d.getPar(queries[i][1])));
 		return ans;
+	}
+
+	public static void main(String[] args) {
+
 	}
 }

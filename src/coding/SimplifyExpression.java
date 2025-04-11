@@ -2,8 +2,8 @@ package coding;
 
 import java.util.*;
 
-class Solution {
-    public void solve(String s) {
+public class SimplifyExpression {
+    public static void solve(String s) {
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -76,22 +76,18 @@ class Solution {
         }
         System.out.println(sb2.toString());
     }
-}
 
-public class SimplifyExpression {
-    
     public static void main(String[] args) {
-        Solution s = new Solution();
-        s.solve("-a"); // -a
-        s.solve("-a-a-a-b"); // -3a-b
-        s.solve("(a)"); // a
-        s.solve("a-b-a"); // -b
-        s.solve("(a+b)+(b+c)"); // a+2b+c
-        s.solve("(a+b)-(b+c)"); // a-c
-        s.solve("(a+b)-(b-c)"); // a+c
-        s.solve("(a-b)-b-b"); // a - 3b
-        s.solve("a+b-(c+(d-b))"); // a + 2b - c - d
-        s.solve("(a+b)-(b+c)-(c+d)"); // a-2c-d
-        s.solve("(a+b)-(b+c)-(c+d)-(d+e)"); // a-2c-2d-e
+        solve("-a"); // -a
+        solve("-a-a-a-b"); // -3a-b
+        solve("(a)"); // a
+        solve("a-b-a"); // -b
+        solve("(a+b)+(b+c)"); // a+2b+c
+        solve("(a+b)-(b+c)"); // a-c
+        solve("(a+b)-(b-c)"); // a+c
+        solve("(a-b)-b-b"); // a - 3b
+        solve("a+b-(c+(d-b))"); // a + 2b - c - d
+        solve("(a+b)-(b+c)-(c+d)"); // a-2c-d
+        solve("(a+b)-(b+c)-(c+d)-(d+e)"); // a-2c-2d-e
     }
 }

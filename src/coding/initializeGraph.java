@@ -13,10 +13,11 @@ public class initializeGraph {
 		List<int[]>[] g = new ArrayList[10]; // Adjacency list to represent the graph
 		System.out.println(g.length);
 
+		Arrays.setAll(g, k -> new ArrayList<>());
 		// Initialize the adjacency list
-		for (int i = 0; i < 10; ++i) {
-			g[i] = new ArrayList<>();
-		}
+//		for (int i = 0; i < 10; ++i) {
+//			g[i] = new ArrayList<>();
+//		}
 
 		// Add an edge from node 0 to node 1
 		g[0].add(new int[]{1, 1});
